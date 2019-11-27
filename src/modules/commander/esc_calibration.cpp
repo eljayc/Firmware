@@ -54,8 +54,10 @@
 
 using namespace time_literals;
 
-int do_esc_calibration(orb_advert_t *mavlink_log_pub, struct actuator_armed_s *armed)
+int do_esc_calibration(struct actuator_armed_s *armed)
 {
+	orb_advert_t *mavlink_log_pub{nullptr};
+
 	int	return_code = PX4_OK;
 
 #if defined(__PX4_POSIX_OCPOC) || defined(__PX4_POSIX_BBBLUE)

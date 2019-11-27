@@ -174,8 +174,9 @@ typedef struct  {
 	int		sensor_correction_sub;
 } accel_worker_data_t;
 
-int do_accel_calibration(orb_advert_t *mavlink_log_pub)
+int do_accel_calibration()
 {
+	orb_advert_t *mavlink_log_pub{nullptr};
 #ifdef __PX4_NUTTX
 	int fd;
 #endif
@@ -791,8 +792,9 @@ calibrate_return calculate_calibration_values(unsigned sensor,
 	return calibrate_return_ok;
 }
 
-int do_level_calibration(orb_advert_t *mavlink_log_pub)
+int do_level_calibration()
 {
+	orb_advert_t *mavlink_log_pub{nullptr};
 	const unsigned cal_time = 5;
 	const unsigned cal_hz = 100;
 	unsigned settle_time = 30;

@@ -50,8 +50,9 @@
 #include <parameters/param.h>
 #include <systemlib/err.h>
 
-int do_trim_calibration(orb_advert_t *mavlink_log_pub)
+int do_trim_calibration()
 {
+	orb_advert_t *mavlink_log_pub{nullptr};
 	uORB::Subscription sub_man{ORB_ID(manual_control_setpoint)};
 	px4_usleep(400000);
 	manual_control_setpoint_s sp{};

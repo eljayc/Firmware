@@ -96,8 +96,9 @@ typedef struct  {
 } mag_worker_data_t;
 
 
-int do_mag_calibration(orb_advert_t *mavlink_log_pub)
+int do_mag_calibration()
 {
+	orb_advert_t *mavlink_log_pub{nullptr};
 	calibration_log_info(mavlink_log_pub, CAL_QGC_STARTED_MSG, sensor_name);
 
 	struct mag_calibration_s mscale_null;

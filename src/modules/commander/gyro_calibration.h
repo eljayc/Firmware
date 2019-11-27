@@ -42,6 +42,6 @@
 #include <stdint.h>
 #include <uORB/uORB.h>
 
-int do_gyro_calibration(orb_advert_t *mavlink_log_pub);
+int do_gyro_calibration();
 
 #endif /* GYRO_CALIBRATION_H_ */

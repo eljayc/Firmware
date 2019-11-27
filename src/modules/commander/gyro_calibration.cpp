@@ -215,8 +215,9 @@ static calibrate_return gyro_calibration_worker(int cancel_sub, void *data)
 	return calibrate_return_ok;
 }
 
-int do_gyro_calibration(orb_advert_t *mavlink_log_pub)
+int do_gyro_calibration()
 {
+	orb_advert_t *mavlink_log_pub{nullptr};
 	int			res = PX4_OK;
 	gyro_worker_data_t	worker_data = {};
 

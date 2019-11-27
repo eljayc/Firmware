@@ -64,8 +64,9 @@ static void feedback_calibration_failed(orb_advert_t *mavlink_log_pub)
 	calibration_log_critical(mavlink_log_pub, CAL_QGC_FAILED_MSG, sensor_name);
 }
 
-int do_airspeed_calibration(orb_advert_t *mavlink_log_pub)
+int do_airspeed_calibration()
 {
+	orb_advert_t *mavlink_log_pub{nullptr};
 	int result = PX4_OK;
 	unsigned calibration_counter = 0;
 	const unsigned maxcount = 2400;

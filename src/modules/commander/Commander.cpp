@@ -254,22 +254,22 @@ extern "C" __EXPORT int commander_main(int argc, char *argv[])
 			int calib_ret = OK;
 
 			if (!strcmp(argv[2], "mag")) {
-				calib_ret = do_mag_calibration(&mavlink_log_pub);
+				calib_ret = do_mag_calibration();
 
 			} else if (!strcmp(argv[2], "accel")) {
-				calib_ret = do_accel_calibration(&mavlink_log_pub);
+				calib_ret = do_accel_calibration();
 
 			} else if (!strcmp(argv[2], "gyro")) {
-				calib_ret = do_gyro_calibration(&mavlink_log_pub);
+				calib_ret = do_gyro_calibration();
 
 			} else if (!strcmp(argv[2], "level")) {
-				calib_ret = do_level_calibration(&mavlink_log_pub);
+				calib_ret = do_level_calibration();
 
 			} else if (!strcmp(argv[2], "esc")) {
-				calib_ret = do_esc_calibration(&mavlink_log_pub, &armed);
+				calib_ret = do_esc_calibration(&armed);
 
 			} else if (!strcmp(argv[2], "airspeed")) {
-				calib_ret = do_airspeed_calibration(&mavlink_log_pub);
+				calib_ret = do_airspeed_calibration();
 
 			} else {
 				PX4_ERR("argument %s unsupported.", argv[2]);
@@ -3318,7 +3318,7 @@ void *commander_low_prio_loop(void *arg)
 					if ((int)(cmd.param1) == 1) {
 						/* gyro calibration */
 						answer_command(cmd, vehicle_command_s::VEHICLE_CMD_RESULT_ACCEPTED, command_ack_pub);
-						calib_ret = do_gyro_calibration(&mavlink_log_pub);
+						calib_ret = do_gyro_calibration();
 
 					} else if ((int)(cmd.param1) == vehicle_command_s::PREFLIGHT_CALIBRATION_TEMPERATURE_CALIBRATION ||
 						   (int)(cmd.param5) == vehicle_command_s::PREFLIGHT_CALIBRATION_TEMPERATURE_CALIBRATION ||
@@ -3329,7 +3329,7 @@ void *commander_low_prio_loop(void *arg)
 					} else if ((int)(cmd.param2) == 1) {
 						/* magnetometer calibration */
 						answer_command(cmd, vehicle_command_s::VEHICLE_CMD_RESULT_ACCEPTED, command_ack_pub);
-						calib_ret = do_mag_calibration(&mavlink_log_pub);
+						calib_ret = do_mag_calibration();
 
 					} else if ((int)(cmd.param3) == 1) {
 						/* zero-altitude pressure calibration */
@@ -3346,28 +3346,28 @@ void *commander_low_prio_loop(void *arg)
 					} else if ((int)(cmd.param4) == 2) {
 						/* RC trim calibration */
 						answer_command(cmd, vehicle_command_s::VEHICLE_CMD_RESULT_ACCEPTED, command_ack_pub);
-						calib_ret = do_trim_calibration(&mavlink_log_pub);
+						calib_ret = do_trim_calibration();
 
 					} else if ((int)(cmd.param5) == 1) {
 						/* accelerometer calibration */
 						answer_command(cmd, vehicle_command_s::VEHICLE_CMD_RESULT_ACCEPTED, command_ack_pub);
-						calib_ret = do_accel_calibration(&mavlink_log_pub);
+						calib_ret = do_accel_calibration();
 
 					} else if ((int)(cmd.param5) == 2) {
 						// board offset calibration
 						answer_command(cmd, vehicle_command_s::VEHICLE_CMD_RESULT_ACCEPTED, command_ack_pub);
-						calib_ret = do_level_calibration(&mavlink_log_pub);
+						calib_ret = do_level_calibration();
 
 					} else if ((int)(cmd.param6) == 1 || (int)(cmd.param6) == 2) {
 						// TODO: param6 == 1 is deprecated, but we still accept it for a while (feb 2017)
 						/* airspeed calibration */
 						answer_command(cmd, vehicle_command_s::VEHICLE_CMD_RESULT_ACCEPTED, command_ack_pub);
-						calib_ret = do_airspeed_calibration(&mavlink_log_pub);
+						calib_ret = do_airspeed_calibration();
 
 					} else if ((int)(cmd.param7) == 1) {
 						/* do esc calibration */
 						answer_command(cmd, vehicle_command_s::VEHICLE_CMD_RESULT_ACCEPTED, command_ack_pub);
-						calib_ret = do_esc_calibration(&mavlink_log_pub, &armed);
+						calib_ret = do_esc_calibration(&armed);
 
 					} else if ((int)(cmd.param4) == 0) {
 						/* RC calibration ended - have we been in one worth confirming? */
